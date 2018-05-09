@@ -6,93 +6,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>index.html</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <style>
-        #secPrincipal {
-          min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
-          min-height: 100vh; /* These two lines are counted as one :-)       */
-
-          display: flex;
-          align-items: center;
-        }
-    </style>
-    <script>
-        function reqListener() {
-            
-            var html = "";
-            
-            var objRetorno = JSON.parse(this.responseText)
-            
-            objRetorno.forEach(function(i){
-                html += criaHTML(i)
-            })
-            
-            
-            
-                       
-            $('#divContent').html(html);
-            $('#secPrincipal').show();
-        }
-
-        function test() {
-            var oReq = new XMLHttpRequest();
-            oReq.addEventListener("load", reqListener);
-            oReq.open("GET", "https://private-7cf60-4youseesocialtest.apiary-mock.com/timeline");
-            oReq.send();
-        }
-        
-        function criaHTML(obj){
-            
-            var html = ' \
-            <div class="col-sm-6 col-md-4"> \
-                <div class="thumbnail"> \
-                        $content \
-                    <div class="caption"> \
-                        <h3>$title</h3> \
-                        <p> \
-                            <b>$type </b>- $description\
-                        </p> \
-                    </div> \
-                </div> \
-            </div> ';
-            
-            if(obj.type == 'video'){
-                
-                var htmlContent = ' \
-                <div class="embed-responsive embed-responsive-16by9"> \
-                      <iframe class="embed-responsive-item" src="$file"></iframe> \
-                </div> ';
-            }else{
-                var htmlContent = ' <img src="$file" alt="$type"> ';
-            }
-            
-            html = html.replaceAll('$content',htmlContent);
-            html = html.replaceAll('$title',obj.title);
-            html = html.replaceAll('$type',obj.type);
-            html = html.replaceAll('$description',obj.description);
-            html = html.replaceAll('$file',obj.file);
-                
-            return html;
-            
-        }
-        
-        
-        
-        String.prototype.replaceAll = String.prototype.replaceAll || function(needle, replacement) {
-            return this.split(needle).join(replacement);
-        };
-        
-        
-    </script>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
 </head>
 
-<body onload="test()">
+<body onload="Request()">
     
     <!-- Section principal -->
     <section id="secPrincipal" style="display:none;">
         
         <div class="row">
             
-            <div class="col-md-10 col-md-offset-1 well" id="divContent">
+            <div class="col-md-10 col-md-offset-1 well" >
+                <select id="CATEGORIAS" class="form-control">
+            
+                </select>
+                
+                <div class="row" id="divContent">
+                </div>
             
             </div>
             

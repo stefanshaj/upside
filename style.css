@@ -1,0 +1,19 @@
+#secPrincipal {
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100%; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center;
+}
+
+.row{
+    width: 100%;
+}
+
+#secPrincipal{
+    margin-top: 20px;
+}
+
+#CATEGORIAS{
+    margin-bottom: 10px;
+}
